@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-space-grotesk);
+
+  --color-main: #ffde59; /* Vibrant Yellow */
+  --color-main-accent: #ffd11a;
+  --color-overlay: rgba(0, 0, 0, 0.8);
+  
+  --color-bg: #fff4e0; /* Warm off-white */
+  --color-text: #111;
+  --color-border: #111;
+
+  --color-pink: #ff6b6b;
+  --color-blue: #4facfe;
+  --color-green: #38b000;
+  
+  --shadow-brutal: 6px 6px 0px 0px rgba(17, 17, 17, 1);
+  --shadow-brutal-hover: 2px 2px 0px 0px rgba(17, 17, 17, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+  .neo-border {
+    border: 3px solid var(--color-border);
+  }
+  
+  .neo-shadow {
+    box-shadow: var(--shadow-brutal);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .neo-shadow:hover {
+    box-shadow: var(--shadow-brutal-hover);
+    transform: translate(4px, 4px);
+  }
+  
+  .neo-button {
+    border: 3px solid var(--color-border);
+    box-shadow: var(--shadow-brutal);
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    cursor: pointer;
+  }
+  .neo-button:hover {
+    box-shadow: var(--shadow-brutal-hover);
+    transform: translate(4px, 4px);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-33.33%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-33.33%); }
+  100% { transform: translateX(0%); }
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 10s linear infinite;
+  }
+  .animate-marquee-reverse {
+    animation: marquee-reverse 10s linear infinite;
+  }
 }
